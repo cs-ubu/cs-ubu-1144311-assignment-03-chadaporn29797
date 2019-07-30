@@ -1,0 +1,33 @@
+{% extends 'commathweb/base.html' %}
+
+{% block content %}
+{% csrf_token %} 
+<div class="row">
+			<span style="text-align: center;">IEEE floating point single precision (32-bit)</span>
+			<form action="#" method="get" class="contact100-form validate-form">
+				<div class="wrap-input100 validate-input">
+					<input id="num" class="input100" type="number" placeholder="1.000" step="any" min="0" max="9999999" name="num" value="{{ d }}">
+					<span class="focus-input100"></span>
+					<label class="label-input100" for="name">
+						<span class="lnr lnr-user m-b-2"></span>
+					</label>
+				</div>
+				<br/>
+				<div class="wrap-input100 validate-input">
+					<div class="jumbotron">
+						<div class="row">
+							<div class="col-md">ผลลัพธ์<hr>{{ answer }}</div>
+						</div>
+					</div>
+				</div>
+				<div class="container-contact100-form-btn">
+					<button class="btn btn-outline-danger">แปลง</button>
+				</div>
+			</form>
+
+		</div>
+	</div> 
+	
+</div>
+
+{% endblock %}

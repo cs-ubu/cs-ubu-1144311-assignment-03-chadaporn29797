@@ -1,0 +1,67 @@
+{% extends 'commathweb/base.html' %}
+
+{% block content %}
+	<form class="contact300-form validate-form" action="#" method="GET">
+
+				{% for i in y %}
+					<!-- <{{ i }}> -->
+				 <h1>แก้ระบบสมการเชิงเส้น $Ax = b$</h1>
+
+					<div class="wrap-input300 validate-input">
+						<input id="name" class="input300" type="text" name="eq" placeholder="กรุณาใส่สมการ">
+						<span class="focus-input300"></span>
+						<label class="label-input300" for="name">
+							<span class="lnr lnr-user m-b-2"></span>
+						</label>
+					</div>
+
+				{% endfor %}
+
+
+				<div class="wrap-input300 validate-input">
+					<input id="name" class="input300" type="text" name="eqb" placeholder="กรุณาใส่สมการ">
+					<span class="focus-input300"></span>
+					<label class="label-input300" for="name">
+						<span class="lnr lnr-user m-b-2"></span>
+					</label>
+				</div>
+				
+
+				<div class="wrap-input100 validate-input">
+					<div class="jumbotron">
+						<div class="row">
+							<div class="col-md">ผลลัพธ์<hr>ยังไม่ออก</div>
+						</div>
+					</div>
+				</div>
+				
+
+
+
+				<div class="container-contact300-form-btn">
+					<button class="contact300-form-btn">
+						See the answer
+					</button>
+				</div>
+			</form>
+
+		</div>
+	</div> <!-- end contact300 -->
+
+{% endblock %}	
+
+<script>
+	function findGetParameter(parameterName) {
+    var result = null,
+        tmp = [];
+    location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+          tmp = item.split("=");
+          if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+    return result;
+	}
+	var data = findGetParameter('param1');
+</script>

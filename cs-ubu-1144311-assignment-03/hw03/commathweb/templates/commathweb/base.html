@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+    {% load static %}
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>ComMath</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+	<link rel="shortcut icon" type="image/x-icon" href="http://pngimg.com/uploads/simpsons/simpsons_PNG2.png" />
+
+	<!-- <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800" rel="stylesheet">	 -->
+	<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="{% static 'commathweb/css/animate.css' %}">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="{% static 'commathweb/css/icomoon.css' %}">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="{% static 'commathweb/css/bootstrap.css' %}">
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="{% static 'commathweb/css/flexslider.css' %}">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="{% static 'commathweb/css/style.css' %}">
+
+	<!-- Modernizr JS -->
+	<script src="{% static 'commathweb/js/modernizr-2.6.2.min.js' %}"></script>
+
+	</head>
+	<body>
+		
+	<div class="fh5co-loader"></div>
+	
+	<div id="page">
+	<nav class="fh5co-nav" role="navigation">
+		<div class="top-menu">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-2">
+						<div id="fh5co-logo"><a href="index">TIKKer<span>.</span></a></div>
+					</div>
+					<div class="col-xs-10 text-right menu-1">
+						<ul>
+							<li class="btn-cta"><a href="IEEE32"><span>IEEE(32-bit)</span></a></li>
+							<li class="btn-cta"><a href="IEEE64"><span>IEEE(64-bit)</span></a></li>
+							<li class="btn-cta"><a href="AB"><span>$Ax = b$</span></a></li>
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</nav>
+
+	<div id="fh5co-features">
+		<div class="container">
+			<div class="services-padding">
+				{% block content %}
+
+   				{% endblock %}
+			</div>
+		</div>
+	</div>
+
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up22"></i></a>
+	</div>
+	
+	<!-- jQuery -->
+	<script src="{% static 'commathweb/js/jquery.min.js' %}"></script>
+	<!-- jQuery Easing -->
+	<script src="{% static 'commathweb/js/jquery.easing.1.3.js' %}"></script>
+	<!-- Bootstrap -->
+	<script src="{% static 'commathweb/js/bootstrap.min.js' %}"></script>
+	<!-- Waypoints -->
+	<script src="{% static 'commathweb/js/jquery.waypoints.min.js' %}"></script>
+	<!-- Flexslider -->
+	<script src="{% static 'commathweb/js/jquery.flexslider-min.js' %}"></script>
+	<!-- Main -->
+	<script src="{% static 'commathweb/js/main.js' %}"></script>
+
+	</body>
+</html>
+
