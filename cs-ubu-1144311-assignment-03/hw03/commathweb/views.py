@@ -1,101 +1,141 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-import csv
 
 def index(req):
-    return render(req,'commathweb/index.html')
+  return render(req, 'commathweb/index.html')
 
-def IEEE32(req):
-    try:
-        r = ''
-        d = req.GET.get('num')
-        d = float(d)
-        print(d, type(d))
-        
-        nb = bin(int(d))
-        nb = nb[2:]
-        print(nb)
-        lung = d-int(d)   
-        while lung>0 and len(nb) + len(r) < 31:
-            lung = lung*2
-            r += str(int(lung))
-            lung -= int(lung) 
-        print("r=",r)
-        
-        e = len(nb)-1
-        s = '0' if d >= 0 else '1'
-        
-        e += 127
-        bie = bin(e)
-        bie = bie[2:]
-        nbbilung = nb+r
-        nbbilung = nbbilung[1:]
-        b = s+bie+nbbilung
-        b = b + '0'*(32-len(b))
-        print(b)
-        result = {'answer':b, 'd':d}
-    except :
-        result = {'answer':"กรุณากรอกค่าใหม่"}
-    return render(req,'commathweb/IEEE32.html',result)
+def Convertback32(x):
+	x = str(x)
+	s = int(x[0])
+	e = int(x[1:9],2)
+	f = 1+sum([ int(x[8+i])*2**-i for i in range(1,24) ])
+	y = (-1)**s * 2**(e-127) * f
+	return y
 
-def IEEE64(req):
-    try:
-        # r = ''
-        x = req.GET.get('num')
-        x = float(x)
-        print(type(x))
-        w = int(x)
-        d = x - w
-        bw = bin(w)[2:]
-        bd = ''
-        while d != 0:
-            d  *= 2
-            bd += str(int(d))
-            d  -= int(d)
-        bwbd = bw+bd
-        t = len(bw) - 1
-        m = bwbd[1:]
-        s = 0 if d >= 0 else 1
-        e = 1023 + t
-        be = bin(e)[2:]
-        b = str(s) + be + m
-        b += '0'*(64-len(b))
-        l = '0'*32
-        print(len(b))
-        result = {'answer':b, 'x':x, 'l':l}
-    except :
-        result = {'answer':"กรุณากรอกค่าใหม่"}
-    return render(req,'commathweb/IEEE64.html',result)
 
-def AB(req):
-    name1 = req.GET.get('name1')
-    # o = float(name1)
-    # o = int(o)
-    # print(o, type(o))
-    a = []
-    for i in range(int(name1)-1):
-        a.append('[input id="name" class="input300" type="text" name="equation" placeholder="กรุณาใส่สมการ"]') 
+def Convertback64(x):
+	x = str(x)
+	s = int(x[0])
+	e = int(x[1:12],2)
+	f = 1+sum([int(x[11+i])*2**-i for i in range(1,53)])
+	y = (-1)**s * 2**(e-1023) * f
+	return y
 
-    print('a=',a)
-    print('i=',i)
+def p32(req):
+	if req.method == 'POST':
+		d = float(req.POST.get('x'))
 
-    m = {
-        'y' : a,
-        'x' : name1
-    }
+		nb = bin(int(d))
+		lung = d - int(d)
 
-    # A = []
-    # b = []
-    eqA = req.GET.get('eq')
-    eqb = req.GET.get('eqb')
-    # A.append(eqA)
-    # b.append(eqb)
-    print(eqA)
-    print("=======================")
-    print(eqb)
-    # a = ['input id="name" class="input300" type="text" name="name" placeholder="Full name"']
-    # for i in range()
-    
-    # p = {'name1':name1}
-    # print(m)
-    return render(req,'commathweb/AB.html',m)
+		bilung=''
+		
+		count = 0
+		while(lung!=0):
+			lung*=2
+			bilung = bilung+str(int(lung))
+			lung -= int(lung)
+			count += 1
+			if count == 17 : break
+
+		nb = nb[2:]
+		e = len(nb)-1
+		
+		s = '0' if d >= 0 else '1'
+		e += 127
+		bie = bin(e)
+		
+		nbbilung = nb+bilung
+		bie = bie[2:]
+		nbbilung = nbbilung[1:]
+		bx = s+bie+nbbilung
+		b = bx + '0'*(32-len(bx))
+
+		conb = Convertback32(b)
+
+		s = b[0]
+		e = b[1:9]
+		f = b[9:33]
+
+		return render(req,'commathweb/p32.html',{'s':s,'e':e,'f':f,'conb':conb,'d':d})
+	else :
+		return render(req,'commathweb/p32.html')
+
+def p64(req):
+	if req.method == 'POST':
+		d = float(req.POST.get('x'))
+		nb = bin(int(d))
+		lung = d - int(d)
+
+		bilung=''
+
+		count = 0
+		while(lung!=0):
+			lung*=2
+			bilung = bilung+str(int(lung))
+			lung -= int(lung)
+			count += 1
+			if count == 44 : break
+
+		nb = nb[2:]
+		e = len(nb)-1
+
+		s = '0' if d >= 0 else '1'
+		e += 1023
+		bie = bin(e)
+
+		nbbilung = nb+bilung
+		bie = bie[2:]
+		nbbilung = nbbilung[1:]
+		bx = s+bie+nbbilung
+		b = bx + '0'*(64-len(bx))
+		conb = Convertback64(b)
+
+		s = b[0]
+		e = b[1:12]
+		f = b[12:65]
+
+		return render(req,'commathweb/p64.html',{'s':s,'e':e,'f':f,'d':d,'conb':conb})
+	else:
+		return render(req,'commathweb/p64.html')
+
+def solve(A, b):
+    import numpy as np
+    a,b = np.array(A), np.array(b)
+    n= len(A[0])
+    x = np.array([0]*n)
+
+    for k in range(0, n-1):
+#1
+        for j in range(k+1, n):
+            if a[j,k] != 0.0:
+                lam = a[j][k]/a[k][k]
+                a[j,k:n] = a[j, k:n] - lam*a[k,k:n]
+                b[j] = b[j] - lam*b[k]
+#2
+    for k in range(n-1,-1,-1):
+        x[k] = (b[k] - np.dot(a[k,k+1:n], x[k+1:n]))/a[k,k]
+    return x.flatten()
+#แก้ระบบสมการเชิงเส้น $Ax = b$
+	#pass
+def datasolve(req):
+	if req.method == 'POST':
+		matrix_y=[]
+		matrix_x=[]
+		data= req.POST.get('data')
+		#x = data.split(',')
+		data2 = data.split('\n')
+		for i in data2:
+			y=[float( i.split('=')[-1] )]
+			matrix_y.append(y)
+			x = (i.split('=')[0]).split(',')
+			matrix_x.append(list(map(float, x)))
+
+		results=solve(matrix_x,matrix_y)
+		mylist = zip(matrix_x,matrix_y)
+	try:
+		return render(req,'commathweb/solve.html',{'mylist':mylist,'results':results})
+	except:
+		return render(req,'commathweb/solve.html')
+
+		
+# Create your views here.
