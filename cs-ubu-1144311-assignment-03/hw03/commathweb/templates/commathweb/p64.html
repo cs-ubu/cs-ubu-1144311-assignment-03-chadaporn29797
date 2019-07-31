@@ -8,20 +8,22 @@
         </div>
     </section>
     <br>
-    <br>
     <section>
-            <h4> กรอกตัวเลขที่ต้องการแปลง</h4>
             <form action='' method="post">
                 {% csrf_token %}
+                <div class="col-sm-4">
+                <h4> กรอกตัวเลขที่ต้องการแปลง</h4>
                 <input name="x" type="number" step=any class="form-control"/ value="{{d}}">
                 <br>
                 <button type="submit" class="btn btn-primary">คำนวน</button>
+                </div>
             </form>
-            <br>
+        <div class="col-sm-8">
         <h2> ผลลัพธ์ </h2>
         <h4>s = {{s}}</h4>
         <h4>e = {{e}}</h4>
         <h4>f = {{f}}</h4>
+        </div>
         <br>
     </section>
 </div>

@@ -1,35 +1,30 @@
 {% extends 'commathweb/base.html' %}
 {% block content %}
-<br>
-<br>
-<br>
+
 <div class="section_container second_section_container flex_container flex_center">
     <div class="text header_text text_grad_purple_yellow">
-       <center> <h3>แก้ระบบสมการเชิงเส้น $Ax = b$<i class="fa fa-angle-double-right "></i></h3> </center>
+    <h3>แก้ระบบสมการเชิงเส้น $Ax = b$</h3>
     </div>
-       
-        
-
 <section>
 <div class="container">
     <div class="row">
-             <div class="col-md-6" >
+             <div class="col-sm-4" >
                     <div class="container">
                         <div class="form-group">
-                                <h3><strong>กรุณากรอกค่าต่อไปนี้</strong></h3>
+                                <h4>กรุณากรอกค่าต่อไปนี้</h4>
                                     <form action='' method="post">
                                         {% csrf_token %}
-                                        <textarea name = "data" rows="7" cols="100"></textarea>
+                                        <textarea name = "data" rows="3" cols="50"></textarea>
                                         <br>
                                         <br>
                                         <input type="submit" class="btn btn-primary" >
                                     </form>  
                                     <br>
-                              <h2><strong> ผลลัพธ์ </strong></h2>
+                              <h4> ผลลัพธ์ </h4>
                     {% for r in results %}
                         {{r}},
                     {% endfor %}
-                    <hr>
+                    <p>-----------------------------------</p>
                     {% for i, j in mylist %}
                         {{ i }} = {{ j }} <br>
                     {% endfor %}
